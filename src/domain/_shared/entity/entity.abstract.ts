@@ -1,7 +1,8 @@
+import { UUID } from 'crypto';
 import { Notification } from '../notification/notification'
 
 export abstract class Entity {
-    protected _id?: string;
+    protected _id?: UUID;
     public notification: Notification;
 
     constructor(){

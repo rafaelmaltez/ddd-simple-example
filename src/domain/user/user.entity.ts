@@ -8,11 +8,11 @@ export class User extends Entity {
   private _username: string;
   private _password: Password;
 
-  constructor(username: string, password: string, id?: UUID) {
+  constructor(username: string, password: Password, id?: UUID) {
     super();
     this._id = id || randomUUID();
     this._username = username;
-    this._password = BcryptPassword.create(password);
+    this._password = password
 
     this.validate();
   }
@@ -33,6 +33,7 @@ export class User extends Entity {
   }
 
   checkPassword(password: string) {
-    return this._password.compare(password)
+    const isValid = this._password.compare(password);
+    if (!isValid) throw new Error("Invalid credentials");
   }
 }

@@ -10,10 +10,8 @@ export class Login {
         const user = await this.repo.getOneUser(input.username)
         if (!user) return;
         user.checkPassword(input.password);
-        const token = this.tokenGenerator.generate({ id: user.id, username: user.username})
-        return {
-            token
-        }
+        const token = await this.tokenGenerator.generate({ id: user.id, username: user.username})
+        return token;
     }
 }
 
