@@ -32,7 +32,7 @@ export class User extends Entity {
     return this._password.hash;
   }
 
-  checkPassword(password: string) {
+  async checkPassword(password: string) {
     const isValid = this._password.compare(password);
     if (!isValid) throw new Error("Invalid credentials");
   }

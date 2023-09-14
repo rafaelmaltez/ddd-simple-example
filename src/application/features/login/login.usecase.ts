@@ -8,8 +8,8 @@ export class Login {
     ){}
     async execute(input: LoginInput){
         const user = await this.repo.getOneUser(input.username)
-        if (!user) return;
-        user.checkPassword(input.password);
+        if (!user) throw new Error("Invalid credentials");
+        await user.checkPassword(input.password);
         const token = await this.tokenGenerator.generate({ id: user.id, username: user.username})
         return token;
     }

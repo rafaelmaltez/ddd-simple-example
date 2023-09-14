@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt'
 
 export interface Password {
     hash: string
-    compare(hash: string): boolean
+    compare(hash: string): Promise<boolean>
 }
 
 export class BcryptPassword implements Password{
@@ -11,11 +11,12 @@ export class BcryptPassword implements Password{
     private constructor(value: string){
         this.hash = value
     }
-    compare(value: string): boolean {
-        return bcrypt.compareSync(value, this.hash)
+    async compare(value: string) {
+        return bcrypt.compare(value, this.hash)
     }
-    static create(value: string): Password {
-        return new BcryptPassword(bcrypt.hashSync(value, 12))
+    static async create(value: string): Promise<Password> {
+        const hash = await bcrypt.hash(value, 12)
+        return new BcryptPassword(hash);
     }
     static restore(hash: string) {
         return new BcryptPassword(hash)

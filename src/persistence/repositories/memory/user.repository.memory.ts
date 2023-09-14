@@ -12,7 +12,11 @@ type UserData = {
 
 export class UserRepositoryMemory implements GetUserRepository, SaveUserRepository{
     private static _instance: UserRepositoryMemory
-    users: UserData[] = []
+    users: UserData[];
+
+    private constructor(){
+        this.users = []
+    }
     
     async getOneUser(username: string): Promise<User | undefined> {
         const userData = this.users.find((user) => user.username = username)

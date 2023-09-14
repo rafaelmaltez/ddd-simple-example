@@ -9,7 +9,7 @@ export class Signup {
     private readonly tokenGenerator: TokenGenerator
   ) {}
   async execute(input: SignupInput): Promise<SignupOutput> {
-    const user = new User(input.username, BcryptPassword.create(input.password));
+    const user = new User(input.username, await BcryptPassword.create(input.password));
     await this.repo.save(user);
     const token = await this.tokenGenerator.generate({id: user.id, username: user.username});
     return token;
