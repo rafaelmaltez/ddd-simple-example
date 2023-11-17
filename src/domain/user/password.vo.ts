@@ -15,6 +15,9 @@ export class BcryptPassword implements Password{
         return bcrypt.compare(value, this.hash)
     }
     static async create(value: string): Promise<Password> {
+        if(value.length < 6 ) {
+            throw new Error("Invalid password")
+        }
         const hash = await bcrypt.hash(value, 12)
         return new BcryptPassword(hash);
     }
