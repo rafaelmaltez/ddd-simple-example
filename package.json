@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --inspect=0.0.0.0 src/index.ts"
-    
   },
   "keywords": [],
   "author": "",

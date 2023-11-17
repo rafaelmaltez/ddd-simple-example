@@ -3,8 +3,6 @@ import { SignupUseCaseFactory } from "../factories/signup.usecase.factory";
 
 import { HttpServer } from "../interfaces/http-server.interface";
 
-
-
 export default class UserController {
     login = LoginUseCaseFactory.create()
     signup = SignupUseCaseFactory.create()
