@@ -33,7 +33,7 @@ export class User extends Entity {
   }
 
   async checkPassword(password: string) {
-    const isValid = this._password.compare(password);
+    const isValid = await this._password.compare(password);
     if (!isValid) throw new Error("Invalid credentials");
   }
 }
