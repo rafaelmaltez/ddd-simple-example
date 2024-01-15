@@ -24,6 +24,4 @@ export default class UserController {
           return token;
         });
     }
-
-
 }
