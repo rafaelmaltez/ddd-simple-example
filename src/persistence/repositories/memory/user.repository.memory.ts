@@ -19,7 +19,7 @@ export class UserRepositoryMemory implements GetUserRepository, SaveUserReposito
     }
     
     async getOneUser(username: string): Promise<User | undefined> {
-        const userData = this.users.find((user) => user.username = username)
+        const userData = this.users.find((user) => user.username === username)
         if (userData) {
             return new User(userData.username, BcryptPassword.restore(userData.password_hash), userData.id )
         }
